@@ -16,6 +16,7 @@
 
 Переходим на http://mdn.cyber-ed.space/console:
 ![flask_console](https://github.com/k3vg3n/MDN/assets/87700221/6549e1d5-abeb-4844-86d3-3ec23e4dada3)
+
 На нем находится Werkzeug Debugger, значит сайт написан на Flask.
 Чтобы зайти в консоль и выполнить файл read_flag нам нужно знать pin-код, а у нас его нет.
 Из [статьи](https://habr.com/ru/articles/738238/pin-код) узнаем, что pin-код flask генерируетcя на основе:
@@ -32,12 +33,15 @@
 Тут обращаемся к особенности таска - *markdown*.
 Ищем расширения на python:
 ![markdown_search](https://github.com/k3vg3n/MDN/assets/87700221/21fad3e3-d858-4a2d-87f8-feded7cb1525)
+
 Находим два основных расширения: Python-Markdown и pymdown-extensions.
 На Python-Markdown я не нашел AFR, в отличии от pymdown-extensions ([CVE-2023-32309](https://www.cve.org/CVERecord?id=CVE-2023-32309), [github](https://github.com/advisories/GHSA-jh85-wwv9-24hv)):
 ![pymdown_AFR](https://github.com/k3vg3n/MDN/assets/87700221/ec8d3dfd-5423-496a-bd68-461ae102a6eb)
+
 Создадим шаблон, который мы будем менять и отправлять: `--8<-- "../../../../etc/passwd"`
 Попробуем прочитать /etc/passwd (`--8<-- "../../../../etc/passwd"`):
 ![passwd](https://github.com/k3vg3n/MDN/assets/87700221/080749f6-43dc-4ac7-9753-82635796aa36)
+
 Успешно.
 Теперь мы можем прочитать нужные нам файлы для генерации pin-кода.
 
@@ -67,6 +71,7 @@ http://mdn.cyber-ed.space/profile
 Cookie: session=your_cookie
 ```
 ![burp](https://github.com/k3vg3n/MDN/assets/87700221/981eca62-255a-4507-ac4d-456c63e77fae)
+
 Путь к приложению: `/usr/local/lib/python3.8/site-packages/flask/app.py`
 
 Итого имеем:
@@ -80,6 +85,7 @@ path: /usr/local/lib/python3.8/site-packages/flask/app.py
 ```
 
 Для генерации pin-кода и cookie используем [этот скрипт](https://github.com/SidneyJob/Werkzeuger).
+
 Устанавливаем:
 ```
 git clone https://github.com/SidneyJob/Werkzeuger
@@ -93,7 +99,9 @@ python gen.py --username app --path /usr/local/lib/python3.8/site-packages/flask
 ```
 Получаем куки:
 ![run_script](https://github.com/k3vg3n/MDN/assets/87700221/14e40c6d-a0ec-4853-8a4a-92fcd6295981)
+
 ![run_script_out](https://github.com/k3vg3n/MDN/assets/87700221/fd20a744-4bbc-4eb1-8154-6cb34596c43b)
+
 
 Нам нужны строчки:
 ```
@@ -108,9 +116,11 @@ python gen.py --username app --path /usr/local/lib/python3.8/site-packages/flask
 ### Получаем доступ к консоли
 Если у Вас превышен лимит на ввод pin-кода, то открываем [консоль](http://mdn.cyber-ed.space/console) и подставляем куки в браузер (иначе можете просто ввести pin):
 ![new_cookie](https://github.com/k3vg3n/MDN/assets/87700221/cf07246a-b090-4da9-b2b3-ca667192cfbf)
+
 Перезагружаем страницу.
 Мы зашли в консоль.
 ![console_enter](https://github.com/k3vg3n/MDN/assets/87700221/7dd318ef-c31c-430b-8d00-d6c3ecf2617a)
+
 
 
 ### Получаем флаг
@@ -151,6 +161,7 @@ subprocess.run(["/app/read_flag"], capture_output=True)
 CompletedProcess(args=['/app/read_flag'], returncode=0, stdout=b'flag{fl45k_d3bu6_m0d3_15_un54f3}', stderr=b'')
 ```
 ![console_flag](https://github.com/k3vg3n/MDN/assets/87700221/5ea91a4d-be37-4294-b1e7-258164b0c2b8)
+
 ##### Флаг: flag{fl45k_d3bu6_m0d3_15_un54f3}
 
 
