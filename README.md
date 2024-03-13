@@ -1,10 +1,11 @@
 
 Райтап на Web таск от CyberEd - "MarkDownNotes"
-Описание:
-"MarkDownNotes - очередной сайт для хранения заметок. Мы заботимся о безопасности данных наших клиентов! Однако на поддержание сервиса уходит много средств, поэтому бесплатно предоставляются только 10 заметок. Используйте их с умом! Акция: найдите багу по программе бабаунти и докажите её, исполнив файл read_flag в корне приложения, и получите бесплатное пользование сервисом навсегда!"
+
+Описание: "MarkDownNotes - очередной сайт для хранения заметок. Мы заботимся о безопасности данных наших клиентов! Однако на поддержание сервиса уходит много средств, поэтому бесплатно предоставляются только 10 заметок. Используйте их с умом! Акция: найдите багу по программе бабаунти и докажите её, исполнив файл read_flag в корне приложения, и получите бесплатное пользование сервисом навсегда!"
 
 После регистрации на [сайте](http://mdn.cyber-ed.space) нас встречает сервис заметок:
 ![main_site](https://github.com/k3vg3n/MDN/assets/87700221/7a506887-a406-41d5-a6d2-1bda25fa43d7)
+
 Добавлять можно до 10 заметок на аккаунт.
 
 
@@ -26,6 +27,7 @@
 4. Username - имя пользователя в системе linux
 5. MAC-адрес устройства
 6. Machine_id - ID устройства
+
 Нам сразу известны Appname и Modname.
 Надо найти остальные значения, прочитав файлы в системе.
 
@@ -48,7 +50,7 @@
 Теперь мы можем прочитать нужные нам файлы для генерации pin-кода.
 
 ### Получение данных и генерация pin-кода
-Имя пользователя мы уже получили из /etc/passwd - "app"
+Имя пользователя мы уже получили из /etc/passwd - "app".
 Чтобы получить MAC-адрес, нам нужно знать по какому интерфейсу устройство выходит в сеть. Для этого читаем файл `/proc/net/dev` (`--8<-- "../../../../proc/net/dev"`):
 ```
 Inter-| Receive | Transmit face |bytes packets errs drop fifo frame compressed multicast|bytes packets errs drop fifo colls carrier compressed eth0: 86949846 338155 0 0 0 0 0 0 100381675 357756 0 0 0 0 0 0 lo: 1341217 13102 0 0 0 0 0 0 1341217 13102 0 0 0 0 0 0
@@ -61,7 +63,19 @@ Inter-| Receive | Transmit face |bytes packets errs drop fifo frame compressed m
 `04a9330868336aa19c457b402d5a4f7c`
 и  `/proc/self/cgroup`:
 ```
-12:blkio:/docker/dd35ea90bfcd720753811d819d07487f73bfcb410a477e014b0edb56db5bf0f9 11:rdma:/docker/dd35ea90bfcd720753811d819d07487f73bfcb410a477e014b0edb56db5bf0f9 10:pids:/docker/dd35ea90bfcd720753811d819d07487f73bfcb410a477e014b0edb56db5bf0f9 9:perf_event:/docker/dd35ea90bfcd720753811d819d07487f73bfcb410a477e014b0edb56db5bf0f9 8:freezer:/docker/dd35ea90bfcd720753811d819d07487f73bfcb410a477e014b0edb56db5bf0f9 7:net_cls,net_prio:/docker/dd35ea90bfcd720753811d819d07487f73bfcb410a477e014b0edb56db5bf0f9 6:devices:/docker/dd35ea90bfcd720753811d819d07487f73bfcb410a477e014b0edb56db5bf0f9 5:hugetlb:/docker/dd35ea90bfcd720753811d819d07487f73bfcb410a477e014b0edb56db5bf0f9 4:cpu,cpuacct:/docker/dd35ea90bfcd720753811d819d07487f73bfcb410a477e014b0edb56db5bf0f9 3:cpuset:/docker/dd35ea90bfcd720753811d819d07487f73bfcb410a477e014b0edb56db5bf0f9 2:memory:/docker/dd35ea90bfcd720753811d819d07487f73bfcb410a477e014b0edb56db5bf0f9 1:name=systemd:/docker/dd35ea90bfcd720753811d819d07487f73bfcb410a477e014b0edb56db5bf0f9 0::/docker/dd35ea90bfcd720753811d819d07487f73bfcb410a477e014b0edb56db5bf0f9
+12:blkio:/docker/dd35ea90bfcd720753811d819d07487f73bfcb410a477e014b0edb56db5bf0f9
+11:rdma:/docker/dd35ea90bfcd720753811d819d07487f73bfcb410a477e014b0edb56db5bf0f9
+10:pids:/docker/dd35ea90bfcd720753811d819d07487f73bfcb410a477e014b0edb56db5bf0f9
+9:perf_event:/docker/dd35ea90bfcd720753811d819d07487f73bfcb410a477e014b0edb56db5bf0f9
+8:freezer:/docker/dd35ea90bfcd720753811d819d07487f73bfcb410a477e014b0edb56db5bf0f9
+7:net_cls,net_prio:/docker/dd35ea90bfcd720753811d819d07487f73bfcb410a477e014b0edb56db5bf0f9
+6:devices:/docker/dd35ea90bfcd720753811d819d07487f73bfcb410a477e014b0edb56db5bf0f9
+5:hugetlb:/docker/dd35ea90bfcd720753811d819d07487f73bfcb410a477e014b0edb56db5bf0f9
+4:cpu,cpuacct:/docker/dd35ea90bfcd720753811d819d07487f73bfcb410a477e014b0edb56db5bf0f9
+3:cpuset:/docker/dd35ea90bfcd720753811d819d07487f73bfcb410a477e014b0edb56db5bf0f9
+2:memory:/docker/dd35ea90bfcd720753811d819d07487f73bfcb410a477e014b0edb56db5bf0f9
+1:name=systemd:/docker/dd35ea90bfcd720753811d819d07487f73bfcb410a477e014b0edb56db5bf0f9
+0::/docker/dd35ea90bfcd720753811d819d07487f73bfcb410a477e014b0edb56db5bf0f9
 ```
 Из `/proc/self/cgroup` нам нужна последняя строчка:
 `0::/docker/dd35ea90bfcd720753811d819d07487f73bfcb410a477e014b0edb56db5bf0f9`
@@ -171,6 +185,7 @@ CompletedProcess(args=['/app/read_flag'], returncode=0, stdout=b'flag{fl45k_d3bu
 ### Спасибо за прочтение!
 
 Полезные ссылки:
+
 https://habr.com/ru/articles/738238/
 
 https://security.snyk.io/vuln/SNYK-PYTHON-PYMDOWNEXTENSIONS-5537103
