@@ -10,7 +10,6 @@
 
 ### Разведка
 Запустим nikto:
-
 ![nikto_out](https://github.com/k3vg3n/MDN/assets/87700221/d70df5d4-7285-463c-b0a1-5e2c44769ed0)
 
 
