@@ -39,7 +39,9 @@
 ![pymdown_AFR](https://github.com/k3vg3n/MDN/assets/87700221/ec8d3dfd-5423-496a-bd68-461ae102a6eb)
 
 Создадим шаблон, который мы будем менять и отправлять: `--8<-- "../../../../etc/passwd"`
+
 Попробуем прочитать /etc/passwd (`--8<-- "../../../../etc/passwd"`):
+
 ![passwd](https://github.com/k3vg3n/MDN/assets/87700221/080749f6-43dc-4ac7-9753-82635796aa36)
 
 Успешно.
@@ -70,7 +72,8 @@ POST
 http://mdn.cyber-ed.space/profile 
 Cookie: session=your_cookie
 ```
-![burp](https://github.com/k3vg3n/MDN/assets/87700221/981eca62-255a-4507-ac4d-456c63e77fae)
+![burp1](https://github.com/k3vg3n/MDN/assets/87700221/32369825-70ee-4fc7-8109-dd40a7089a59)
+
 
 Путь к приложению: `/usr/local/lib/python3.8/site-packages/flask/app.py`
 
@@ -165,8 +168,9 @@ CompletedProcess(args=['/app/read_flag'], returncode=0, stdout=b'flag{fl45k_d3bu
 ##### Флаг: flag{fl45k_d3bu6_m0d3_15_un54f3}
 
 
-Спасибо за прочтение!
+### Спасибо за прочтение!
 
 Полезные ссылки:
 https://habr.com/ru/articles/738238/
+
 https://security.snyk.io/vuln/SNYK-PYTHON-PYMDOWNEXTENSIONS-5537103
