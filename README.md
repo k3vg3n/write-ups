@@ -1,3 +1,4 @@
+Author: @k3vg3n
 
 Райтап на Web таск от CyberEd - "MarkDownNotes"
 
