@@ -51,8 +51,7 @@
 2. Нахождение длины имени подкаталога по n индексу: `' or string-length(name(/root/*[{node_num}]))={length} or '`
 3. Нахождение имени подкаталога путем перебора по алфавиту: `' or substring(name(/root/*[{node_num}]), {i}, 1) = '{c}' or '`, где i - это индекс символа в имени подкаталога, c - это символ в алфавите.
 
-
-![daWay_solve_vid.mp4](/LetoCTF/assets/daWay_solve_vid.mp4)
+[![daWay_solve_vid](https://i.sstatic.net/Vp2cE.png)](https://github.com/k3vg3n/write-ups/blob/main/LetoCTF/assets/daWay_solve_vid.mp4)
 
 Находим путь к флагу: `/root/secrettecret/flag` и сам флаг: **letoctf{XML_master_da_Way_XPAth_WaY}**
 
