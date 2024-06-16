@@ -5,15 +5,15 @@
 Описание: Найди путь к флагу и достань его из секретного документохранилища
 
 На веб странице нас встречает форма поиска:
-![[web_main.png]]
+![web_main](/LetoCTF/assets/web_main.png)
 
 Переместимся в burp suite и попробуем подставить в запрос  символ `'`:
-![[web_error.png]]
+![web_error](/LetoCTF/assets/web_error.png)
 
 А вот и ошибка :)
 Предполагаем, что поиск осуществляется по БД SQL.
 Попробуем подставить базовую SQL-инъекцию `111' or 1=1 -- ` :
-![[web_sqlinj.png]]
+![web_sqlinj](/LetoCTF/assets/web_sqlinj.png)
 
 Получаем тот же ответ.
 Через пару часов постоянного подбора инъекций было выяснено, что поиск работает не на БД SQL. 
@@ -33,16 +33,16 @@
 Доступ к документу осуществляется по его пути. Например, для извлечения имени кота надо ввести путь к нему: `/petstore/pet/name`
 
 Теперь попробуем внедрить базовый пэйлоад для Xpath `' or true() or '`:
-![[assets/web_success.png]]
+![web_success](/LetoCTF/assets/web_success.png)
 Получаем: `Данные переданы для модерации`.
 Если же отправим `' or false() or '`, то получим: `Ничего не найдено`.
 
 Перед нами **Blind Xpath boolean-based injection**. То есть сервер нам может ответить либо истину, либо ложь.
 
 Например узнаем число подкаталогов в /root:
-![[num_nodes_2.png]]
+![num_nodes_2](/LetoCTF/assets/num_nodes_2.png)
 из ответа видим, что не 2, пробуем с тремя:
-![[num_nodes_3.png]]
+![num_nodes_3](/LetoCTF/assets/num_nodes_3.png)
 А вот и верный ответ!
 
 Естественно делать это вручную долго, поэтому был написан небольшой скрипт (solve.py).
@@ -52,7 +52,7 @@
 3. Нахождение имени подкаталога путем перебора по алфавиту: `' or substring(name(/root/*[{node_num}]), {i}, 1) = '{c}' or '`, где i - это индекс символа в имени подкаталога, c - это символ в алфавите.
 
 
-![[daWay_solve_vid.mp4]]
+![daWay_solve_vid.mp4](/LetoCTF/assets/daWay_solve_vid.mp4)
 
 Находим путь к флагу: `/root/secrettecret/flag` и сам флаг: **letoctf{XML_master_da_Way_XPAth_WaY}**
 
